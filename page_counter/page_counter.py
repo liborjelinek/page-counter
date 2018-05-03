@@ -57,7 +57,7 @@ class PageCounter:
         if isinstance(dialect, str):
             if dialect not in dialect_names:
                 raise ValueError(
-                    "Unknown builtin dialect '{dialect}'. If you pass 'dialect' argument of a"
+                    "Unknown builtin dialect '{dialect}'. If you pass 'dialect' argument of a "
                     "str type, it must be one of builtin dialect names. Existing builtin names are "
                     "defined in 'page_counter.dialect_names' list and contains these dialect"
                     "names: {dialect_names}".format(dialect=dialect, dialect_names=dialect_names))
