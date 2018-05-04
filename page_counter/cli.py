@@ -3,43 +3,50 @@ import sys
 
 from page_counter import PageCounter, dialect_choices
 
+RT_INVALID_USAGE = -1
 
-def _invalid_usage():
-    print("""Missing commandline arguments. You must specify standard page dialect, folder, and
-file type (extension). Usage:
 
-    page-counter <extension> <folder> <dialect>
+def print_err(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
-For example to count pages in all *.txt or .TXT files in ~/books/python-for-novices/ using Czech
-standard page dialect:
 
-    page-counter txt ~/books/python-for-novices/ cz_sk_1800_standard_pages
-
-Dialects known to page-counter are:
-""", file=sys.stderr)
+def invalid_usage():
+    print_err("Missing commandline arguments. You must always specify standard page dialect and "
+              "file or folder. For folder you have to say which files you want to explore.")
+    print_err()
+    print_err("    page-counter <dialect> <file>")
+    print_err("    page-counter <dialect> <folder> <file_extension>")
+    print_err()
+    print_err("For example to count pages in readme.rst in current directory using Czech standard "
+              "page dialect:")
+    print_err()
+    print_err("    page-counter cz_sk_1800_standard_pages readme.rst")
+    print_err()
+    print_err("For example to count pages in all *.txt or .TXT files in ~/books/python-for-novices/"
+              ":")
+    print_err()
+    print_err("    page-counter cz_sk_1800_standard_pages ~/books/python-for-novices/ txt")
+    print_err()
+    print_err("Dialects known to page-counter are:")
 
     for (dialect_name, dialect_help) in dialect_choices:
-        print("    * {} - {}".format(dialect_name, dialect_help), file=sys.stderr)
+        print_err("    * {} - {}".format(dialect_name, dialect_help))
+
+    return RT_INVALID_USAGE
 
 
-def walk_error(error):
-    print("Encountered '{error}' during traversing folder".format(error=error),
-          file=sys.stderr)
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        _invalid_usage()
-        sys.exit(1)
-
-    ext = sys.argv[1]
-    folder = sys.argv[2]
-    dialect = sys.argv[3]
+def in_folder(argv):
+    dialect = argv[1]
+    folder = argv[2]
+    ext = argv[3]
 
     total_pages = 0
 
-    print("Counting pages in all {ext} files in '{folder}' using '{dialect}' "
-          "dialect:".format(ext=ext, folder=folder, dialect=dialect))
+    print("Counting pages in *.{ext} files in '{folder}' using '{dialect}' dialect:".format(
+        ext=ext, folder=folder, dialect=dialect))
+
+    def walk_error(error):
+        print_err("Encountered '{error}' during traversing folder".format(error=error))
 
     for dirpath, dirname, filenames in os.walk(folder, onerror=walk_error):
         for filename in filenames:
@@ -59,5 +66,40 @@ if __name__ == '__main__':
         print("No {ext} files found.")
 
     else:
-        print("-> {total_pages} total pages in '{dialect}' dialect".format(total_pages=total_pages,
-                                                                           dialect=dialect))
+        print("-> {total_pages} total pages in '{dialect}' dialect.".format(total_pages=total_pages,
+                                                                            dialect=dialect))
+
+    return total_pages
+
+
+def in_file(argv):
+    dialect = argv[1]
+    file = argv[2]
+
+    with open(file, 'r') as f:
+        text = f.read()
+        pages = PageCounter(text).page_count(dialect)
+
+    print("File '{file}' has {pages} pages using '{dialect}' dialect.".format(file=file,
+                                                                              pages=pages,
+                                                                              dialect=dialect))
+    return pages
+
+
+def main(argv):
+    num_of_args = len(argv)
+
+    # return code is page count
+
+    if num_of_args == 3:
+        return in_file(argv)
+
+    elif num_of_args == 4:
+        return in_folder(argv)
+
+    else:
+        return invalid_usage()
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
