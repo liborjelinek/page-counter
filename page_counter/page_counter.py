@@ -1,6 +1,6 @@
 import re
 
-from django.utils.html import strip_tags
+from bs4 import BeautifulSoup
 
 from page_counter import dialect_names, dialects
 
@@ -20,7 +20,8 @@ class PageCounter:
         self.text = text
 
         if strip_html:
-            self.text = strip_tags(self.text)
+            # dear BeautifulSoup, use builtin Python HTML parser
+            self.text = BeautifulSoup(text, 'html.parser').get_text()
 
     def chars_with_spaces(self):
         return len(self.text)
