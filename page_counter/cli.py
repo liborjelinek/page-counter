@@ -36,9 +36,9 @@ def invalid_usage():
 
 
 def in_folder(argv):
-    dialect = argv[1]
-    folder = argv[2]
-    ext = argv[3]
+    dialect = argv[0]
+    folder = argv[1]
+    ext = argv[2]
 
     total_pages = 0
 
@@ -73,8 +73,8 @@ def in_folder(argv):
 
 
 def in_file(argv):
-    dialect = argv[1]
-    file = argv[2]
+    dialect = argv[0]
+    file = argv[1]
 
     with open(file, 'r') as f:
         text = f.read()
@@ -86,15 +86,15 @@ def in_file(argv):
     return pages
 
 
-def main(argv):
+def main(argv=sys.argv[1:]):
     num_of_args = len(argv)
 
     # return code is page count
 
-    if num_of_args == 3:
+    if num_of_args == 2:
         return in_file(argv)
 
-    elif num_of_args == 4:
+    elif num_of_args == 3:
         return in_folder(argv)
 
     else:
@@ -102,4 +102,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv))
+    sys.exit(main())
