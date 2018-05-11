@@ -11,7 +11,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='page-counter',
-    version='1.0.0',
+    version='1.0.1',
     packages=['page_counter'],
     url='https://github.com/bircow/page-counter',
     license='MIT',
