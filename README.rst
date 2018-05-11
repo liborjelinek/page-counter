@@ -76,6 +76,17 @@ methods to compute page count. Example of simple dialect function::
 If you think your standard page dialects should be builtin dialect, consider sharing it as an issue
 or (better) as a pull request.
 
+Builtin standard page dialects
+==============================
+
+Currently PageCounter includes the following builtin page dialects.
+
+* ``cz_sk_1800_chars_standard_page`` - Czech and Slovak standard page (normostrana) is 1800 chars per page including spaces.
+* ``cz_sk_1800_chars_space_savvy_standard_page`` - Czech and Slovak standard page (normostrana) is 1800 chars per page excluding multiple spaces.
+* ``uk_1000_words_standard_page`` - UK standard page is 1000 words per page.
+* ``eu_1500_chars_standard_page`` - Standard page used in many EU countries is 1500 chars per page including spaces.
+* ``eu_1500_chars_space_savvy_standard_page`` - Standard page used in many EU countries is 1500 chars per page excluding multiple spaces.
+
 Page Counter commandline tool
 *****************************
 
