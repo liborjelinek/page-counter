@@ -34,13 +34,13 @@ class TestCzSk1800StandardPages(TestCase):
 
     def test_cz_sk_1800_standard_page(self):
         expected = 5
-        actual = PageCounter(self.test_text).page_count('cz_sk_1800_standard_page')
+        actual = PageCounter(self.test_text).page_count('cz_sk_1800_chars_standard_page')
 
         self.assertEqual(expected, actual)
 
     def test_cz_sk_1800_space_savvy_standard_page(self):
         expected = 4
-        actual = PageCounter(self.test_text).page_count('cz_sk_1800_space_savvy_standard_page')
+        actual = PageCounter(self.test_text).page_count('cz_sk_1800_chars_space_savvy_standard_page')
 
         self.assertEqual(expected, actual)
 

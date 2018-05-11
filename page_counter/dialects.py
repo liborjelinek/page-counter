@@ -73,14 +73,14 @@ def _space_savvy_standard_page(page_counter, chars_per_page):
 # Actual dialect functions come bellow
 # ####################################
 
-def cz_sk_1800_standard_page(page_counter):
+def cz_sk_1800_chars_standard_page(page_counter):
     """
     Czech and Slovak standard page (normostrana) is 1800 chars per page including spaces.
     """
     return _plain_standard_page(page_counter, 1800)
 
 
-def cz_sk_1800_space_savvy_standard_page(page_counter):
+def cz_sk_1800_chars_space_savvy_standard_page(page_counter):
     """
     Czech and Slovak standard page (normostrana) is 1800 chars per page excluding multiple spaces.
     """
@@ -120,11 +120,11 @@ def eu_1500_chars_space_savvy_standard_page(page_counter):
 # Sequence of builtin dialects. For book-keeping purposes only. It contains 2-tuples of dialect
 # name and description.
 dialect_choices = (
-    (cz_sk_1800_standard_page.__name__,
-     cz_sk_1800_standard_page.__doc__.strip()),
+    (cz_sk_1800_chars_standard_page.__name__,
+     cz_sk_1800_chars_standard_page.__doc__.strip()),
 
-    (cz_sk_1800_space_savvy_standard_page.__name__,
-     cz_sk_1800_space_savvy_standard_page.__doc__.strip()),
+    (cz_sk_1800_chars_space_savvy_standard_page.__name__,
+     cz_sk_1800_chars_space_savvy_standard_page.__doc__.strip()),
 
     (uk_1000_words_standard_page.__name__,
      uk_1000_words_standard_page.__doc__.strip()),

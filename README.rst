@@ -62,7 +62,7 @@ for builtin dialects, or of callable for your own dialects.
 If argument is of str, it must be builtin dialect name. Builtin dialect names are defined in
 ``page_counter.dialect_names`` list. For example::
 
-   number_of_pages = page_counter.page_count('cz_sk_1800_space_savvy_standard_page')
+   number_of_pages = page_counter.page_count('cz_sk_1800_chars_space_savvy_standard_page')
 
 Or you can write your own dialect callable (i.e. a function for our purposes) and pass it to
 ``page_count()``. Your dialect function must accept ``PageCounter`` instance. Use ``PageCounter``

@@ -18,7 +18,7 @@ class TestCli(TestCase):
         self.assertEqual(cli.main(['', 'more', 'than', 'three', 'args']), cli.RT_INVALID_USAGE)
 
     def test_in_folder(self):
-        self.assertEqual(cli.main(['', 'cz_sk_1800_standard_page', 'resources', 'txt']), 5)
+        self.assertEqual(cli.main(['', 'cz_sk_1800_chars_standard_page', 'resources', 'txt']), 5)
 
     def test_in_file(self):
-        self.assertEqual(cli.main(['', 'cz_sk_1800_standard_page', self.test_file_path]), 5)
+        self.assertEqual(cli.main(['', 'cz_sk_1800_chars_standard_page', self.test_file_path]), 5)
