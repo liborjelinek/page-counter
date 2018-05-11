@@ -87,6 +87,32 @@ def cz_sk_1800_space_savvy_standard_page(page_counter):
     return _space_savvy_standard_page(page_counter, 1800)
 
 
+def uk_1000_words_standard_page(page_counter):
+    """
+    UK standard page is 1000 words per page.
+    """
+    pages = round(page_counter.word_count() / 1000)
+
+    if pages == 0:
+        return 1
+
+    return pages
+
+
+def eu_1500_chars_standard_page(page_counter):
+    """
+    Standard page used in many EU countries is 1500 chars per page including spaces.
+    """
+    return _plain_standard_page(page_counter, 1500)
+
+
+def eu_1500_chars_space_savvy_standard_page(page_counter):
+    """
+    Standard page used in many EU countries is 1500 chars per page excluding multiple spaces.
+    """
+    return _space_savvy_standard_page(page_counter, 1500)
+
+
 # ####################################################
 # Don't forget to append your dialects to builtin ones
 # ####################################################
@@ -98,7 +124,16 @@ dialect_choices = (
      cz_sk_1800_standard_page.__doc__.strip()),
 
     (cz_sk_1800_space_savvy_standard_page.__name__,
-     cz_sk_1800_space_savvy_standard_page.__doc__.strip())
+     cz_sk_1800_space_savvy_standard_page.__doc__.strip()),
+
+    (uk_1000_words_standard_page.__name__,
+     uk_1000_words_standard_page.__doc__.strip()),
+
+    (eu_1500_chars_standard_page.__name__,
+     eu_1500_chars_standard_page.__doc__.strip()),
+
+    (eu_1500_chars_space_savvy_standard_page.__name__,
+     eu_1500_chars_space_savvy_standard_page.__doc__.strip())
 )
 
 # Builtin dialect names list
